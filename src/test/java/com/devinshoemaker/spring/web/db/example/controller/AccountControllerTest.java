@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.util.NestedServletException;
 
 import java.util.UUID;
 
@@ -52,6 +53,25 @@ public class AccountControllerTest {
         assertNotNull(createdAccount.getName());
         assertEquals(createdAccount.getName(), account.getName());
         assertEquals(createdAccount.isActive(), account.isActive());
+    }
+
+    @Test
+    public void createEmpty() throws Exception {
+        Gson gson = new Gson();
+
+        Account account = new Account();
+
+        try {
+            mvc.perform(MockMvcRequestBuilders.post("/user")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(gson.toJson(account))
+                    .accept(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isInternalServerError());
+        } catch (NestedServletException e) {
+            // Do nothing
+            // We want this to catch because this request currently
+            // returns a 500 if the name is not included in the request body.
+        }
     }
 
 }
