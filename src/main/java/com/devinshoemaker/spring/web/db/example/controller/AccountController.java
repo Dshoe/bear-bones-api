@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * CRUD operations for the user table.
  *
@@ -29,7 +31,7 @@ public class AccountController {
      * @return The created account record.
      */
     @RequestMapping(value = "/user", method = RequestMethod.POST)
-    public ResponseEntity<Account> create(@RequestBody Account account) {
+    public ResponseEntity<Account> create(@RequestBody @Valid Account account) {
         return new ResponseEntity<>(accountRepository.save(account), HttpStatus.CREATED);
     }
 
