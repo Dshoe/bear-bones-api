@@ -48,6 +48,20 @@ public class AccountControllerTest {
     }
 
     @Test
+    public void createActiveNotSet() throws Exception {
+        Account account = new Account();
+        account.setName(UUID.randomUUID().toString());
+
+        Account createdAccount = createNewAccount(account);
+
+        assertNotNull(createdAccount);
+        assertNotNull(createdAccount.getId());
+        assertNotNull(createdAccount.getName());
+        assertEquals(createdAccount.getName(), account.getName());
+        assertTrue(createdAccount.isActive());
+    }
+
+    @Test
     public void createEmpty() throws Exception {
         Account account = new Account();
         mvc.perform(MockMvcRequestBuilders.post("/account")

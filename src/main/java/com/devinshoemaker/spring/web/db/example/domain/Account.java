@@ -16,7 +16,7 @@ public class Account {
     private Integer id;
     @NotNull
     private String name;
-    private boolean active;
+    private boolean active = true;
 
     public Integer getId() {
         return id;
