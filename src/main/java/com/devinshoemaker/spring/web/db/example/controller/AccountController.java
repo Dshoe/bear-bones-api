@@ -35,4 +35,15 @@ public class AccountController {
         return new ResponseEntity<>(accountRepository.save(account), HttpStatus.CREATED);
     }
 
+    /**
+     * Get an account by it's ID.
+     *
+     * @param id The ID of the account.
+     * @return The account for the given ID.
+     */
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Account> findById(@PathVariable int id) {
+        return new ResponseEntity<>(accountRepository.findOne(id), HttpStatus.OK);
+    }
+
 }

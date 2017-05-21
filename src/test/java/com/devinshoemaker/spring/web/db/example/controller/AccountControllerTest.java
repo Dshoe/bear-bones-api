@@ -57,6 +57,28 @@ public class AccountControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    @Test
+    public void findById() throws Exception {
+        Gson gson = new Gson();
+        Account newAccount = new Account();
+        newAccount.setName(UUID.randomUUID().toString());
+        newAccount.setActive(true);
+
+        Account createdAccount = createNewAccount(newAccount);
+
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/user/" + createdAccount.getId())
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+        Account retrievedAccount = gson.fromJson(result.getResponse().getContentAsString(), Account.class);
+
+        assertNotNull(retrievedAccount);
+        assertNotNull(retrievedAccount.getId());
+        assertNotNull(retrievedAccount.getName());
+        assertEquals(retrievedAccount.getName(), newAccount.getName());
+        assertEquals(retrievedAccount.isActive(), newAccount.isActive());
+    }
+
     private Account createNewAccount(Account account) throws Exception {
         Gson gson = new Gson();
         MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/user")
