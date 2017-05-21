@@ -49,19 +49,16 @@ public class AccountControllerTest {
 
     @Test
     public void createEmpty() throws Exception {
-        Gson gson = new Gson();
-
         Account account = new Account();
         mvc.perform(MockMvcRequestBuilders.post("/user")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(gson.toJson(account))
+                .content(new Gson().toJson(account))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }
 
     private Account createNewAccount(Account account) throws Exception {
         Gson gson = new Gson();
-
         MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/user")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(gson.toJson(account))
