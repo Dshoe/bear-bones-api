@@ -50,7 +50,7 @@ public class AccountControllerTest {
     @Test
     public void createEmpty() throws Exception {
         Account account = new Account();
-        mvc.perform(MockMvcRequestBuilders.post("/user")
+        mvc.perform(MockMvcRequestBuilders.post("/account")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new Gson().toJson(account))
                 .accept(MediaType.APPLICATION_JSON))
@@ -66,7 +66,7 @@ public class AccountControllerTest {
 
         Account createdAccount = createNewAccount(newAccount);
 
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/user/" + createdAccount.getId())
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/account/" + createdAccount.getId())
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
@@ -81,7 +81,7 @@ public class AccountControllerTest {
 
     private Account createNewAccount(Account account) throws Exception {
         Gson gson = new Gson();
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/user")
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/account")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(gson.toJson(account))
                 .accept(MediaType.APPLICATION_JSON))

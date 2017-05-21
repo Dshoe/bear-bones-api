@@ -30,7 +30,7 @@ public class AccountController {
      * @param account A new account object to be created.
      * @return The created account record.
      */
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    @RequestMapping(value = "/account", method = RequestMethod.POST)
     public ResponseEntity<Account> create(@RequestBody @Valid Account account) {
         return new ResponseEntity<>(accountRepository.save(account), HttpStatus.CREATED);
     }
@@ -41,7 +41,7 @@ public class AccountController {
      * @param id The ID of the account.
      * @return The account for the given ID.
      */
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/account/{id}", method = RequestMethod.GET)
     public ResponseEntity<Account> findById(@PathVariable int id) {
         return new ResponseEntity<>(accountRepository.findOne(id), HttpStatus.OK);
     }
