@@ -33,10 +33,25 @@ public class AccountControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void create() throws Exception {
+    public void createActive() throws Exception {
         Account account = new Account();
         account.setName(UUID.randomUUID().toString());
         account.setActive(true);
+
+        Account createdAccount = createNewAccount(account);
+
+        assertNotNull(createdAccount);
+        assertNotNull(createdAccount.getId());
+        assertNotNull(createdAccount.getName());
+        assertEquals(createdAccount.getName(), account.getName());
+        assertEquals(createdAccount.isActive(), account.isActive());
+    }
+
+    @Test
+    public void createInactive() throws Exception {
+        Account account = new Account();
+        account.setName(UUID.randomUUID().toString());
+        account.setActive(false);
 
         Account createdAccount = createNewAccount(account);
 
