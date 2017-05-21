@@ -34,19 +34,11 @@ public class AccountControllerTest {
 
     @Test
     public void create() throws Exception {
-        Gson gson = new Gson();
-
         Account account = new Account();
         account.setName(UUID.randomUUID().toString());
         account.setActive(true);
 
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/user")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(gson.toJson(account))
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated())
-                .andReturn();
-        Account createdAccount = gson.fromJson(result.getResponse().getContentAsString(), Account.class);
+        Account createdAccount = createNewAccount(account);
 
         assertNotNull(createdAccount);
         assertNotNull(createdAccount.getId());
@@ -65,6 +57,18 @@ public class AccountControllerTest {
                 .content(gson.toJson(account))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
+    }
+
+    private Account createNewAccount(Account account) throws Exception {
+        Gson gson = new Gson();
+
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/user")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(gson.toJson(account))
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andReturn();
+        return gson.fromJson(result.getResponse().getContentAsString(), Account.class);
     }
 
 }
