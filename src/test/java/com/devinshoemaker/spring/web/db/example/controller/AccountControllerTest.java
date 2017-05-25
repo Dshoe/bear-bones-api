@@ -135,6 +135,28 @@ public class AccountControllerTest {
         assertNotEquals(updatedAccount.isActive(), newAccount.isActive());
     }
 
+    @Test
+    public void delete() throws Exception {
+        Gson gson = new Gson();
+        Account newAccount = new Account();
+        newAccount.setName(UUID.randomUUID().toString());
+        newAccount.setActive(true);
+
+        Account createdAccount = createNewAccount(newAccount);
+
+        mvc.perform(MockMvcRequestBuilders.delete("/account/" + createdAccount.getId())
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/account/" + createdAccount.getId())
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+        Account retrievedAccount = gson.fromJson(result.getResponse().getContentAsString(), Account.class);
+        assertNull(retrievedAccount);
+    }
+
     private Account createNewAccount(Account account) throws Exception {
         Gson gson = new Gson();
         MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/account")

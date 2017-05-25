@@ -59,4 +59,16 @@ public class AccountController {
         return new ResponseEntity<>(accountRepository.save(account), HttpStatus.OK);
     }
 
+    /**
+     * Delete an account by it's ID.
+     *
+     * @param id The ID of the account.
+     * @return Response code 200.
+     */
+    @RequestMapping(value = "/account/{id}", method = RequestMethod.DELETE)
+    public HttpStatus delete(@PathVariable int id) {
+        accountRepository.delete(id);
+        return HttpStatus.OK;
+    }
+
 }
