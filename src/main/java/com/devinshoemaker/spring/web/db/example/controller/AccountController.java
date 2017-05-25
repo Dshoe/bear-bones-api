@@ -46,4 +46,17 @@ public class AccountController {
         return new ResponseEntity<>(accountRepository.findOne(id), HttpStatus.OK);
     }
 
+    /**
+     * Update an account by it's ID.
+     *
+     * @param id The ID of the account.
+     * @param account The updated account.
+     * @return The updated account.
+     */
+    @RequestMapping(value = "/account/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Account> updateById(@PathVariable int id, @RequestBody @Valid Account account) {
+        account.setId(id);
+        return new ResponseEntity<>(accountRepository.save(account), HttpStatus.OK);
+    }
+
 }

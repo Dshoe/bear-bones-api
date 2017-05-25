@@ -108,6 +108,33 @@ public class AccountControllerTest {
         assertEquals(retrievedAccount.isActive(), newAccount.isActive());
     }
 
+    @Test
+    public void update() throws Exception {
+        Gson gson = new Gson();
+        Account newAccount = new Account();
+        newAccount.setName(UUID.randomUUID().toString());
+        newAccount.setActive(true);
+
+        Account updatedAccount = createNewAccount(newAccount);
+        updatedAccount.setName(UUID.randomUUID().toString());
+        updatedAccount.setActive(false);
+
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.put("/account/" + updatedAccount.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(gson.toJson(updatedAccount))
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+        updatedAccount = gson.fromJson(result.getResponse().getContentAsString(), Account.class);
+
+        assertNotNull(updatedAccount);
+        assertNotNull(updatedAccount.getId());
+        assertNotNull(updatedAccount.getName());
+        assertNotEquals(updatedAccount.getId(), newAccount.getId());
+        assertNotEquals(updatedAccount.getName(), newAccount.getName());
+        assertNotEquals(updatedAccount.isActive(), newAccount.isActive());
+    }
+
     private Account createNewAccount(Account account) throws Exception {
         Gson gson = new Gson();
         MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/account")
