@@ -49,7 +49,7 @@ public class AccountController {
     /**
      * Update an account by it's ID.
      *
-     * @param id The ID of the account.
+     * @param id      The ID of the account.
      * @param account The updated account.
      * @return The updated account.
      */
