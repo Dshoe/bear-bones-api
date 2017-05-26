@@ -55,6 +55,9 @@ public class AccountController {
      */
     @RequestMapping(value = "/account/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Account> updateById(@PathVariable int id, @RequestBody @Valid Account account) {
+        if (accountRepository.findOne(id) == null) {
+            throw new IllegalArgumentException("No account found with ID: " + id);
+        }
         account.setId(id);
         return new ResponseEntity<>(accountRepository.save(account), HttpStatus.OK);
     }

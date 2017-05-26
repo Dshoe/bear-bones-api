@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.util.NestedServletException;
 
+import java.util.Random;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
@@ -133,6 +134,26 @@ public class AccountControllerTest {
         assertNotEquals(updatedAccount.getId(), newAccount.getId());
         assertNotEquals(updatedAccount.getName(), newAccount.getName());
         assertNotEquals(updatedAccount.isActive(), newAccount.isActive());
+    }
+
+    @Test
+    public void updateNoAccount() throws Exception {
+        Gson gson = new Gson();
+        Account newAccount = new Account();
+        newAccount.setId(Integer.MAX_VALUE);
+        newAccount.setName(UUID.randomUUID().toString());
+        newAccount.setActive(true);
+
+        try {
+            mvc.perform(MockMvcRequestBuilders.put("/account/" + newAccount.getId())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(gson.toJson(newAccount))
+                    .accept(MediaType.APPLICATION_JSON))
+                    .andReturn();
+            assertTrue(false); // Fail the test if an exception is not thrown
+        } catch (NestedServletException e) {
+            // Do nothing
+        }
     }
 
     @Test
