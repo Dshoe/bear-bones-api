@@ -1,6 +1,6 @@
-package com.devinshoemaker.spring.web.db.example.controller;
+package com.devinshoemaker.bear.bones.api.controller;
 
-import com.devinshoemaker.spring.web.db.example.domain.Account;
+import com.devinshoemaker.bear.bones.api.domain.Account;
 import com.google.gson.Gson;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.util.NestedServletException;
 
-import java.util.Random;
 import java.util.UUID;
 
 import static org.junit.Assert.*;

@@ -1,4 +1,4 @@
-package com.devinshoemaker.spring.web.db.example.controller;
+package com.devinshoemaker.bear.bones.api.controller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
