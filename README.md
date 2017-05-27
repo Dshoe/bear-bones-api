@@ -1,5 +1,12 @@
-# Spring Web DB Example
-Demo project for Spring Boot with web MVC, Spring Security and JPA
+# Bear Bones API
+An open source bare bones API
+
+Features
+-
+- Spring Boot
+- Web MVC
+- JPA
+- Basic CRUD
 
 Run Project
 -
