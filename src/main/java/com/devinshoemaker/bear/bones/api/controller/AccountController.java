@@ -1,7 +1,7 @@
-package com.devinshoemaker.spring.web.db.example.controller;
+package com.devinshoemaker.bear.bones.api.controller;
 
-import com.devinshoemaker.spring.web.db.example.domain.Account;
-import com.devinshoemaker.spring.web.db.example.repository.AccountRepository;
+import com.devinshoemaker.bear.bones.api.domain.Account;
+import com.devinshoemaker.bear.bones.api.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

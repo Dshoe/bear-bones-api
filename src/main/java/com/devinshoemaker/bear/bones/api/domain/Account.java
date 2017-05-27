@@ -1,4 +1,4 @@
-package com.devinshoemaker.spring.web.db.example.domain;
+package com.devinshoemaker.bear.bones.api.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

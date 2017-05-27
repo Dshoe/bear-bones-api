@@ -1,12 +1,12 @@
-package com.devinshoemaker.spring.web.db.example;
+package com.devinshoemaker.bear.bones.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringWebDbExampleApplication {
+public class BearBonesApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringWebDbExampleApplication.class, args);
+        SpringApplication.run(BearBonesApiApplication.class, args);
     }
 }

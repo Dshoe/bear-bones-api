@@ -1,6 +1,6 @@
-package com.devinshoemaker.spring.web.db.example.repository;
+package com.devinshoemaker.bear.bones.api.repository;
 
-import com.devinshoemaker.spring.web.db.example.domain.Account;
+import com.devinshoemaker.bear.bones.api.domain.Account;
 import org.springframework.data.repository.CrudRepository;
 
 /**
